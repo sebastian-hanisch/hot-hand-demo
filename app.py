@@ -230,7 +230,7 @@ n_p, m_p = min(settings.n, C.POWER_N_CAP), min(settings.m, C.POWER_M_CAP)
 runs = C.POWER_REPS_PER_SEED * len(C.SWEEP_SEEDS)
 st.markdown(
     f"Gleiche Folgen, zwei Entscheidungsregeln, jeweils einseitig bei 5 %: die **naive Prüfung** (Mittel der Folgenschätzer gegen 0,5) und der **Permutationstest** (Würfe jeder Folge {C.PERM_B}-mal zufällig umordnen, "
-    "den echten Wert in dieser Verteilung einordnen). Gezählt wird, in wie viel Prozent der Läufe die Regel „heiß“ meldet, wenn die Münze Persistenz q hat; bei q = 0,5 ist das die Fehlalarmquote."
+    "den echten Wert in dieser Verteilung einordnen). Gezählt wird, in wie viel Prozent der Läufe die Regel „heiß“ meldet, wenn die Münze Persistenz q hat; bei q = 0,5 ist das die Fehlerrate 1. Art (Type-I-Fehlerrate)."
 )
 st.caption(f"Läuft für n = {n_p}, k = {settings.k}, {m_p} Folgen (n und m sind für die Rechenzeit auf {C.POWER_N_CAP} und {C.POWER_M_CAP} gedeckelt), q = " + ", ".join(fmt(v / 100, 2) for v in C.Q_GRID_PCT) +
            f"; {runs} Läufe je q ({len(C.SWEEP_SEEDS)} feste Zufalls-Seeds zu je {C.POWER_REPS_PER_SEED}). Der Regler q gilt hier nicht, er steht nur als Linie im Bild.")

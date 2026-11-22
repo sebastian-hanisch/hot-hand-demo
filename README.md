@@ -17,7 +17,7 @@ Folgen gemittelt, ist in endlichen Folgen verzerrt: Bei einer **fairen Münze** 
   Sein Grenzwert für sehr viele Folgen ist exakt q, bei fairer Münze 0,5.
 - **Eine echte Abhängigkeit sieht bei kurzen Folgen nach wenig aus:** Hat die Münze Persistenz q = 0,65 (nach einem Treffer folgt mit 65 % wieder einer), liegt das Maß bei n = 20 und k = 3 im Erwartungswert bei 0,518; bei q = 0,60 bei 0,464, also **unter** 0,5.
 - **Gegen die in der Demo definierte naive Prüfung (gegen 0,5, ohne Korrektur der Verzerrung) findet der Permutationstest die Abhängigkeit früher** (n = 50, k = 2, 20 Folgen, 100 Läufe je q, Raster 0,05): 80 % Teststärke ab q = 0,60 gegen ab q = 0,65; bei q = 0,55 meldet er in 47 % der Läufe „heiß“, die naive Prüfung in 18 %.
-- **Die naive Prüfung meldet bei fairer Münze häufig „kalt“:** in etwa 19 % der Läufe (n = 50, k = 2, 20 Folgen), bei n = 20 und k = 3 in etwa 43 %, mit einer Streuung zwischen den 5 Zufalls-Seeds (je 20 Läufe) von 10 bis 25 % bzw. 20 bis 55 %; der Permutationstest in 4 % bzw. 2 % (Fehlalarmquote 5 % ist sein Ziel).
+- **Die naive Prüfung meldet bei fairer Münze häufig „kalt“:** in etwa 19 % der Läufe (n = 50, k = 2, 20 Folgen), bei n = 20 und k = 3 in etwa 43 %, mit einer Streuung zwischen den 5 Zufalls-Seeds (je 20 Läufe) von 10 bis 25 % bzw. 20 bis 55 %; der Permutationstest in 4 % bzw. 2 % (Fehlerrate 1. Art von 5 % ist sein Ziel).
 
 ## Kernfrage
 
@@ -42,7 +42,7 @@ Wahrscheinlichkeit **q** wieder einer (q = 0,5: unabhängige Würfe, die faire M
 - **Permutationstest** (`hoh_algorithm.permutation_test`): Prüfgröße = Mittel der Folgenschätzer; jede Folge wird einzeln zufällig umgeordnet (gleiche Trefferzahl), 99 Umordnungen (999 im wachsenden Beispiel), p = (1 + Zahl der mindestens so extremen Umordnungen) / (Umordnungen + 1),
   einseitig. Gültig unter „die Würfe jeder Folge sind austauschbar“ (Orakel-Test: exakter p-Wert aus allen Anordnungen).
 - **Naive Prüfung** (`hoh_algorithm.naive_test`): dieselbe Prüfgröße gegen 0,5 gehalten, Standardfehler aus der Binomial-Näherung; „heiß“ bei z > 1,645, „kalt“ bei z < −1,645.
-- **Teststärke** (`hoh_evaluation.power_curve`): je q in {0,50; 0,55; 0,60; 0,65; 0,70; 0,80} 5 Zufalls-Seeds zu je 20 Läufen (100 Läufe), je Lauf m Folgen der Länge n; gezählt wird, wie oft eine Regel „heiß“ (einseitig nach oben bei 5 %) meldet. Bei q = 0,50 ist das die Fehlalarmquote.
+- **Teststärke** (`hoh_evaluation.power_curve`): je q in {0,50; 0,55; 0,60; 0,65; 0,70; 0,80} 5 Zufalls-Seeds zu je 20 Läufen (100 Läufe), je Lauf m Folgen der Länge n; gezählt wird, wie oft eine Regel „heiß“ (einseitig nach oben bei 5 %) meldet. Bei q = 0,50 ist das die Fehlerrate 1. Art (Type-I-Fehlerrate).
   Der Lauf ist auf n ≤ 100 und m ≤ 20 gedeckelt (Rechenzeit) und startet erst auf Klick.
 
 ## Befunde (gemessen, keine Behauptungen)
@@ -123,7 +123,7 @@ Dieselbe Rechnung mit n = 20, k = 3 (kürzere Folgen, größeres k; `test_power_
 | „heiß“: naive Prüfung | 0 % | 0 % | 3 % | 11 % | 39 % | 92 % |
 | „kalt“: naive Prüfung bei q = 0,50 | 43 % | | | | | |
 
-Hier erreicht der Permutationstest 80 % Teststärke erst bei q = 0,80 im Raster (bei q = 0,70 sind es 74 %); in beiden Tabellen bleibt die Fehlalarmquote des Permutationstests bei q = 0,5 im Mittel über die 5 Zufalls-Seeds unter 7 % (je Zufalls-Seed bis 10 %; `test_false_alarm_rate_of_the_permutation_test_stays_near_five_percent_everywhere`).
+Hier erreicht der Permutationstest 80 % Teststärke erst bei q = 0,80 im Raster (bei q = 0,70 sind es 74 %); in beiden Tabellen bleibt die Fehlerrate 1. Art des Permutationstests bei q = 0,5 im Mittel über die 5 Zufalls-Seeds unter 7 % (je Zufalls-Seed bis 10 %; `test_false_alarm_rate_of_the_permutation_test_stays_near_five_percent_everywhere`).
 
 ## Befunde und Korrekturen gegenüber dem Plan
 
